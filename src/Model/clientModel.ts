@@ -1,6 +1,6 @@
+import { IHealthProblems } from './../Interfaces/health-problems.interface';
 import ClientSchema from "../Schemas/clientSchema";
 import { ICreateClient } from "Interfaces/createClient.interface";
-
 
 const insertClient = async (user: ICreateClient) => {
     const clientCreated = new ClientSchema({ ...user })
@@ -60,8 +60,34 @@ const updateClient = async (id: string, update: Partial<ICreateClient>) => {
                 return o
             }
         ).catch(
-            (e) => {
+            (err) => {
                 console.log('Error on Updated User')
+                console.log(err)
+            }
+
+        )
+}
+
+const addHealthProblem = async (id: string, update: IHealthProblems) => {
+    const user = await ClientSchema.findById(id)
+    const previousHealthProblems = user?.healthProblems
+    const existingProblem = previousHealthProblems?.find(problem => problem.name?.toLowerCase() === update.problem_name?.toLowerCase() && problem.degree?.toLowerCase() === update.degree?.toLowerCase())
+    if (!existingProblem) {
+        previousHealthProblems?.push(update)
+    }
+    else {
+        console.log("Erro ao Adicionar Problema de Saúde")
+    }
+
+    return await ClientSchema.findByIdAndUpdate(id, { healthProblems: previousHealthProblems })
+        .then(
+            (o) => {
+                return o
+            }
+        ).catch(
+            (err) => {
+                console.log('Error on Updated User')
+                console.log(err)
             }
 
         )
@@ -72,5 +98,6 @@ export default {
     insertClient,
     deleteClient,
     updateClient,
-    getClients
+    getClients,
+    addHealthProblem
 }

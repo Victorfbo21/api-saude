@@ -19,4 +19,9 @@ ClientsRouter.patch('/update', (req, res) => {
     return ClientsController.updateClient(req, res)
 })
 
+ClientsRouter.patch('/addHealthProblem', (req, res) => {
+    return ClientsController.addHealthProblem(req, res)
+})
+
+
 export default ClientsRouter;
