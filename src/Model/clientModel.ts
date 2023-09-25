@@ -1,6 +1,7 @@
 import { IHealthProblems } from './../Interfaces/health-problems.interface';
 import ClientSchema from "../Schemas/clientSchema";
 import { ICreateClient } from "Interfaces/createClient.interface";
+import CalculateScore from '../Utils/calculateScore';
 
 const insertClient = async (user: ICreateClient) => {
     try {
@@ -99,10 +100,12 @@ const getTenMoreRisk = async () => {
                 }
             }, 0);
 
-            return { id: user.id, soma: result };
+            return { id: user.id, sd: result };
         });
-
-        console.log(listSum);
+        if (listSum) {
+            const tenMore = CalculateScore(listSum)
+            return tenMore
+        }
     } catch (error) {
         console.log(error);
     }
