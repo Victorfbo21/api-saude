@@ -23,7 +23,7 @@ ClientsRouter.patch('/addHealthProblem', (req, res) => {
     return ClientsController.addHealthProblem(req, res)
 })
 
-ClientsRouter.get('/ten', (req, res) => {
+ClientsRouter.get('/risk', (req, res) => {
     return ClientsController.getTenMoreRisk(req, res)
 })
 
