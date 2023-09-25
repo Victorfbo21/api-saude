@@ -1,30 +1,31 @@
 import { Router } from 'express'
-import ClientsController from '../../Controller/clientsController';
+import { ClientsController } from '../../Controller/clientsController';
 
 const ClientsRouter = Router();
+const clientsController = new ClientsController();
 
 ClientsRouter.get('/list', (req, res) => {
-    return ClientsController.getClients(req, res)
+    return clientsController.getClients(req, res)
 })
 
 ClientsRouter.put('/create', (req, res) => {
-    return ClientsController.insertClient(req, res)
+    return clientsController.insertClient(req, res)
 })
 
 ClientsRouter.delete('/delete', (req, res) => {
-    return ClientsController.deleteClient(req, res)
+    return clientsController.deleteClient(req, res)
 })
 
 ClientsRouter.patch('/update', (req, res) => {
-    return ClientsController.updateClient(req, res)
+    return clientsController.updateClient(req, res)
 })
 
 ClientsRouter.patch('/addHealthProblem', (req, res) => {
-    return ClientsController.addHealthProblem(req, res)
+    return clientsController.addHealthProblem(req, res)
 })
 
 ClientsRouter.get('/risk', (req, res) => {
-    return ClientsController.getTenMoreRisk(req, res)
+    return clientsController.getTenMoreRisk(req, res)
 })
 
 
