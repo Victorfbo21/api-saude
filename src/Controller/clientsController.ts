@@ -60,7 +60,6 @@ export class ClientsController {
             const update: Partial<ICreateClient> = req.body;
             const clientUpdate = await this.clientsModel.updateClient(id, update);
             if (clientUpdate) {
-                res.sendStatus(201);
                 res.send(clientUpdate);
             } else {
                 res.sendStatus(500);

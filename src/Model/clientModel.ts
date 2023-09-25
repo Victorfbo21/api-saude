@@ -90,7 +90,7 @@ export class ClientsModel {
         }
     };
 
-    public getTenMoreRisk = async () => {
+    public getUsersMoreRisk = async () => {
         try {
             const list = await ClientSchema.find();
             const listSum = list.map(function (user) {
