@@ -8,7 +8,7 @@ const insertClient = async (user: ICreateClient) => {
         const savedClient = await clientCreated.save();
         console.log('Client Saved Successfully!');
         return savedClient;
-    } 
+    }
     catch (e) {
         console.log('Error saving client:');
         console.log(e);
@@ -82,9 +82,31 @@ const addHealthProblem = async (id: string, update: IHealthProblems) => {
     } catch (err) {
         console.log('Error on Updated User');
         console.log(err);
-        throw err; 
+        throw err;
     }
 };
+
+const getTenMoreRisk = async () => {
+    try {
+        const list = await ClientSchema.find();
+        const listSum = list.map(function (user) {
+            const result = user.healthProblems.reduce(function (acumulador, value) {
+                const degreeAsNumber = parseFloat(value.degree ?? "");
+                if (!isNaN(degreeAsNumber)) {
+                    return acumulador + degreeAsNumber;
+                } else {
+                    return acumulador;
+                }
+            }, 0);
+
+            return { id: user.id, soma: result };
+        });
+
+        console.log(listSum);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 export default {
@@ -92,5 +114,6 @@ export default {
     deleteClient,
     updateClient,
     getClients,
-    addHealthProblem
+    addHealthProblem,
+    getTenMoreRisk
 }

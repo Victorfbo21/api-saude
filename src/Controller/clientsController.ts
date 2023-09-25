@@ -80,11 +80,22 @@ const addHealthProblem = async (req: any, res: any) => {
     }
 }
 
+const getTenMoreRisk = async (req: any, res: any) => {
+    try {
+        const list = await ClientModel.getTenMoreRisk();
+        res.send(list)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 
 export default {
     insertClient,
     deleteClient,
     updateClient,
     getClients,
-    addHealthProblem
+    addHealthProblem,
+    getTenMoreRisk
 }

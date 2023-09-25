@@ -23,5 +23,9 @@ ClientsRouter.patch('/addHealthProblem', (req, res) => {
     return ClientsController.addHealthProblem(req, res)
 })
 
+ClientsRouter.get('/ten', (req, res) => {
+    return ClientsController.getTenMoreRisk(req, res)
+})
+
 
 export default ClientsRouter;
