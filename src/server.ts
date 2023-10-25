@@ -21,7 +21,7 @@ App.use(Routers)
 
 
 
-route.get('/', (req: Request, res: Response) => {
+route.get('/', (req, res) => {
     res.json({ message: 'hello world with Typescript' })
 })
 
