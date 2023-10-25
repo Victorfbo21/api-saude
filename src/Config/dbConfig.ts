@@ -5,7 +5,6 @@ export const dbConnect = (): Promise<boolean> => {
     MONGO_URL += `${process.env.DATABASE_PORT}`
     MONGO_URL += `/${process.env.DATABASE_DB}`
     mongoose.set('strictQuery', false)
-    console.log(MONGO_URL)
     return mongoose.connect(MONGO_URL,
         {
             authSource: 'admin',
